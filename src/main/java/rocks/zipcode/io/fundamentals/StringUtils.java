@@ -2,10 +2,7 @@ package rocks.zipcode.io.fundamentals;
 
 
 import java.awt.print.Pageable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author leon on 10/01/2019.
@@ -17,14 +14,22 @@ public class StringUtils {
      */
     public static Collection<String> getAllCasings(String string) {
         // get length of string
-        Integer len = string.length();
         // get range of length
-
         // get power-set of range
-
         // for every set in power-set
         // uppercase indices of string using set
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append(string);
+
+        for (int j = 0; j < string.length() ; j++) {
+            for (int i = 0; i < string.length(); i++) {
+                builder.append(",");
+                builder.append(upperCaseIndices(string, i));
+            }
+        }
+        System.out.println(builder.toString());
+
+        return Collections.singleton(builder.toString());
     }
 
     /**
@@ -36,10 +41,9 @@ public class StringUtils {
         StringBuilder builder = new StringBuilder();
         List<Integer> index = Arrays.asList(indices);
         for (int i = 0; i < string.length(); i++) {
-            if(index.contains(i)){
+            if (index.contains(i)) {
                 builder.append(Character.toUpperCase(string.charAt(i)));
-            }
-            else{
+            } else {
                 builder.append(string.charAt(i));
             }
 
