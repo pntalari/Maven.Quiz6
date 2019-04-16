@@ -1,7 +1,9 @@
 package rocks.zipcode.io.collections;
 
-import java.util.Collection;
-import java.util.List;
+import java.sql.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CollectionUtils {
 
@@ -11,7 +13,14 @@ public class CollectionUtils {
      * @return list with identical contents
      */
     public static <E> List<E> toList(Collection collection) {
-        return null;
+        Object[] arr = new Object[collection.size()];
+        int count = 0;
+        for (Object item : collection) {
+            arr[count] = item;
+            count++;
+        }
+
+        return (List<E>) Arrays.asList(arr);
     }
 
     /**
@@ -20,7 +29,13 @@ public class CollectionUtils {
      * @return true if `nestedCollection` contains a collection with contents identical to `collection`
      */
     public static Boolean contains(Collection<? extends Collection<?>> nestedCollection, Collection<?> collection) {
-        return null;
+        Boolean flag = false;
+        if (nestedCollection.contains(collection)) {
+            flag = true;
+        } else {
+            flag = false;
+        }
+        return flag;
     }
 
     /**
@@ -28,7 +43,9 @@ public class CollectionUtils {
      * @return a single collection containing each of the collections passed in as an argument
      */
     public static Collection<? extends Collection<?>> nest(Collection<?>... collections) {
-        return null;
+        Collection<? extends Collection<?>> nestedCollection = Arrays.asList(
+                collections);
+        return nestedCollection;
     }
 
     /**
@@ -36,6 +53,14 @@ public class CollectionUtils {
      * @return a single collection containing the aggregate contents of each collection passed in as an argument
      */
     public static Collection<?> flatten(Collection<?>... collections) {
-        return null;
+//        Object[] arr = new Object[collections.length];
+//        for (int i = 0; i < collections.length; i++) {
+//            arr[i] = collections[i];
+//        }
+        Stream<Object> stream = Arrays.stream(collections)
+                .flatMap(x -> x.stream());
+
+        return Arrays.asList(stream.toArray());
+
     }
 }
