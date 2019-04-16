@@ -2,7 +2,10 @@ package rocks.zipcode.io.fundamentals;
 
 
 import java.awt.print.Pageable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author leon on 10/01/2019.
@@ -31,14 +34,15 @@ public class StringUtils {
      */
     public static String upperCaseIndices(String string, Integer... indices) {
         StringBuilder builder = new StringBuilder();
-        String indexes = indices.toString();
-
+        List<Integer> index = Arrays.asList(indices);
         for (int i = 0; i < string.length(); i++) {
-            if (indexes.charAt(i) == i) {
+            if(index.contains(i)){
                 builder.append(Character.toUpperCase(string.charAt(i)));
-            } else {
+            }
+            else{
                 builder.append(string.charAt(i));
             }
+
         }
         return builder.toString();
     }
@@ -53,12 +57,11 @@ public class StringUtils {
     public static String insertAtIndex(String stringToBeManipulated, String valueToBeInserted, Integer index) {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i <stringToBeManipulated.length() ; i++) {
-            if(i == index){
+        for (int i = 0; i < stringToBeManipulated.length(); i++) {
+            if (i == index) {
                 builder.append(valueToBeInserted);
                 builder.append(stringToBeManipulated.charAt(i));
-            }
-            else {
+            } else {
                 builder.append(stringToBeManipulated.charAt(i));
             }
         }
@@ -75,11 +78,10 @@ public class StringUtils {
     public static String replaceAtIndex(String stringToBeManipulated, Character replacementValue, Integer index) {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i <stringToBeManipulated.length() ; i++) {
-            if(i == index){
+        for (int i = 0; i < stringToBeManipulated.length(); i++) {
+            if (i == index) {
                 builder.append(replacementValue);
-            }
-            else {
+            } else {
                 builder.append(stringToBeManipulated.charAt(i));
             }
         }

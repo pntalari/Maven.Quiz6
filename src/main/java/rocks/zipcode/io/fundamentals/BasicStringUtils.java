@@ -1,5 +1,8 @@
 package rocks.zipcode.io.fundamentals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BasicStringUtils {
     /**
      * @param chars - characters used to instantiate a new string object
@@ -42,17 +45,16 @@ public class BasicStringUtils {
      * @return
      */
     public static String removeSpecifiedCharacters(String string, String charactersToRemove) {
-        String retStr = "";
+        List<Character> remove = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
-        if (string.contains(charactersToRemove)) {
-            for (int i = 0; i < string.length(); i++) {
-                if(builder.toString().contains(charactersToRemove)) {
-                    for (int j = 0; j < charactersToRemove.length(); j++) {
-                        if (string.charAt(i) != charactersToRemove.charAt(j)) {
-                            builder.append(string.charAt(i));
-                        }
-                    }
-                }
+
+        for (int i = 0; i <charactersToRemove.length() ; i++) {
+            remove.add(charactersToRemove.charAt(i));
+        }
+
+        for (int i = 0; i <string.length() ; i++) {
+            if(!remove.contains(string.charAt(i))){
+                builder.append(string.charAt(i));
             }
         }
 
